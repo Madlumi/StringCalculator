@@ -18,7 +18,21 @@ public class StringCalculatorTest {
     assertEquals(3,sc.add("1,2"));
   }
   @Test
-  public void testAddMisc(){
+  public void testMany(){
+    assertEquals(15,sc.add("1,2,4,8"));
+  }
+  @Test
+  public void testNewRow(){
+    assertEquals(3,sc.add("1\n2"));
+  }
+  @Test
+  public void testNewRowAndComa(){
+    assertEquals(7,sc.add("1\n2,4"));
+  }
+
+
+  @Test
+  public void testAddMiscNumbers(){
     assertEquals(100,sc.add("99,1"));
     assertEquals(0,sc.add("0,0"));
     assertEquals(0,sc.add("-100,100"));
