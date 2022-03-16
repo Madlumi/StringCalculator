@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringCalculatorTest {
+
   StringCalculator sc= new StringCalculator();
 
   @Test
@@ -25,6 +26,7 @@ public class StringCalculatorTest {
   public void testNewRow(){
     assertEquals(3,sc.add("1\n2"));
   }
+
   @Test
   public void testNewRowAndComa(){
     assertEquals(7,sc.add("1\n2,4"));
