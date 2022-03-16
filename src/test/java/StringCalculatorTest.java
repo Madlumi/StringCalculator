@@ -41,4 +41,9 @@ public class StringCalculatorTest {
     assertEquals(-100,sc.add("-100"));
     assertEquals(0,sc.add("0"));
   }
+
+  @Test
+  public void testCustomSeps(){
+    assertEquals(7,sc.add("//;\n1;2,4"));
+  }
 }
