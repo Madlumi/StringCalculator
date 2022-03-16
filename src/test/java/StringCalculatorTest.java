@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StringCalculatorTest {
 
@@ -37,13 +38,18 @@ public class StringCalculatorTest {
   public void testAddMiscNumbers(){
     assertEquals(100,sc.add("99,1"));
     assertEquals(0,sc.add("0,0"));
-    assertEquals(0,sc.add("-100,100"));
-    assertEquals(-100,sc.add("-100"));
     assertEquals(0,sc.add("0"));
   }
 
   @Test
   public void testCustomSeps(){
     assertEquals(7,sc.add("//;\n1;2,4"));
+  }
+  @Test
+  public void testNeg(){
+    Throwable e = assertThrows(Exception.class, ()->{sc.add("-1");} );
+    assertTrue(e.getMessage().contains("Negatives not allowed"));
+
+
   }
 }
