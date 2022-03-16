@@ -20,7 +20,9 @@ public class StringCalculator {
     return next;
   }
 
-  public int add(String numbers){
+
+
+  public int add(String numbers) throws Exception {
     int sum = 0;
     char[] sepparators;
     //check if custom seps:
@@ -36,14 +38,21 @@ public class StringCalculator {
     for(int i = 0; i < numbers.length();){
       //get length until next separator
       int untilNextSepparator = getNextSep( numbers.substring(i) ,sepparators);
-      //check if there is a next separator, then add the number
+      //check if there is last
+      int j;
       if(untilNextSepparator>0){
-        sum+=Integer.parseInt(numbers.substring(i,i+untilNextSepparator));
+        j = Integer.parseInt(numbers.substring(i,i+untilNextSepparator));
         i += untilNextSepparator+1;
       }else{
-        sum+=Integer.parseInt(numbers.substring(i));
-        break;
+        j=Integer.parseInt(numbers.substring(i));
+        i = numbers.length();
       }
+      //check if < 0
+      if(j<0){
+        throw new Exception("Negatives not allowed - " + j);
+      }
+      //add to sum
+      sum+=j;
     }
     return sum;
   }
