@@ -13,6 +13,7 @@ public class StringCalculatorTest {
   public void testAddOne(){
     assertEquals(1, sc.add("1"));
   }
+  @Test
   public void testAddTwo(){
     assertEquals(3,sc.add("1,2"));
   }

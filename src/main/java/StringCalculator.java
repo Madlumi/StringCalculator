@@ -4,6 +4,18 @@ public class StringCalculator {
   }
 
   public int add(String numbers){
-    return 0;
+    System.out.println(numbers.length());
+    int sum = 0;
+    for(int i = 0; i < numbers.length();){
+      int n = numbers.substring(i).indexOf(',');
+      if(n>0){
+        sum+=Integer.parseInt(numbers.substring(i,i+n));
+        i += n+1;
+      }else{
+        sum+=Integer.parseInt(numbers.substring(i));
+        break;
+      }
+    }
+    return sum;
   }
 }
