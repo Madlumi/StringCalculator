@@ -1,14 +1,31 @@
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static  org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StringCalculatorTest {
 
-  StringCalculator sc= new StringCalculator();
+  public class logStub implements StringCalculator.Logger {
+    @Override
+    public void log(int number) {
+    }
+  }
+  StringCalculator.Logger ml = mock(StringCalculator.Logger.class);
+  StringCalculator sc;
+
+  @BeforeEach
+  public void initTests(){
+    ml = mock(StringCalculator.Logger.class);
+    sc= new StringCalculator(ml);
+  }
 
   @Test
   public void testAddNone()throws Exception {
+    StringCalculator.Logger ml = mock(StringCalculator.Logger.class);
+    StringCalculator sc= new StringCalculator(ml);
     assertEquals(0,sc.add(""));
   }
   @Test
@@ -49,5 +66,35 @@ public class StringCalculatorTest {
   public void testNeg(){
     Throwable e = assertThrows(Exception.class, ()->{sc.add("-1");} );
     assertTrue(e.getMessage().contains("Negatives not allowed"));
+  }
+
+  @Test
+  public void testTooBig()  throws Exception{
+    assertEquals(1001,sc.add("1001"));
+    verify(ml,times(1)).log(1001);
+  }
+  @Test
+  public void testTooBig2()  throws Exception{
+    assertEquals(1001,sc.add("1001,1001"));
+    verify(ml,times(2)).log(1001);
+  }
+  @Test
+  public void testTooBig3()  throws Exception{
+    assertEquals(1001,sc.add("1001,1000"));
+    verify(ml,times(1)).log(1001);
+    verify(ml,times(0)).log(1000);
+  }
+  @Test
+  public void testNotTooBig()  throws Exception{
+
+    assertEquals(1000,sc.add("1000"));
+    verify(ml,times(0)).log(1000);
+
+  }
+  @Test
+  public void testNotTooBig2()  throws Exception{
+    assertEquals(1000,sc.add("1000,1000"));
+    verify(ml,times(0)).log(1000);
+
   }
 }

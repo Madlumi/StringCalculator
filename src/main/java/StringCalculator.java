@@ -1,8 +1,19 @@
 
 public class StringCalculator {
+
+  public StringCalculator(Logger logger) {
+    this.logger = logger;
+  }
+
   public static void main(String args[]){
     System.out.println("test");
   }
+
+
+  public interface Logger { public void log(int number); }
+
+
+  private final Logger logger;
 
   //helper function to get next sepparator
   private int getNextSep(String s,char[] sepparators){
@@ -50,6 +61,8 @@ public class StringCalculator {
       //check if < 0
       if(j<0){
         throw new Exception("Negatives not allowed - " + j);
+      }else if(j>1000){
+        logger.log(j);
       }
       //add to sum
       sum+=j;
