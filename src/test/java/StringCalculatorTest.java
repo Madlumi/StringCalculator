@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.List;
 
 import static  org.mockito.Mockito.*;
@@ -26,7 +28,26 @@ public class StringCalculatorTest {
 
 
 
+  @Test
+  public void testWelcome()throws Exception {
+    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+    PrintStream ps = new PrintStream(stream);
 
+    PrintStream ops = System.out;
+
+    System.setOut(ps);
+
+    String[] args = {""};
+    StringCalculator.main(args);
+
+    System.setOut(ops);
+    String comp = "";
+    for(int i = 0; i < StringCalculator.welcomeText.length; i++){
+      comp+=( StringCalculator.welcomeText[i] +"\r\n");
+    }
+
+    assertEquals(new String(stream.toByteArray()),comp);
+  }
 
 
 
