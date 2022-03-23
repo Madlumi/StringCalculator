@@ -6,11 +6,13 @@ public class StringCalculator {
   }
 
   public static void main(String args[]){
-    System.out.println("test");
+
+
+
   }
 
 
-  public interface Logger { public void log(int number); }
+  public interface Logger { public void log(Integer number); }
 
 
   private final Logger logger;
