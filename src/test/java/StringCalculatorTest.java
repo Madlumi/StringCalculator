@@ -14,7 +14,7 @@ public class StringCalculatorTest {
     }
   }
   StringCalculator.Logger ml = mock(StringCalculator.Logger.class);
-  StringCalculator sc;
+  StringCalculator sc = new StringCalculator(ml);
 
   @BeforeEach
   public void initTests(){
