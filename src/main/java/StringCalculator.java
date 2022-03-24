@@ -55,7 +55,7 @@ public class StringCalculator {
   private final Logger logger;
 
   //helper function to get next sepparator
-  private int getNextSep(String s,char[] sepparators){
+  private int getNextSep(String s,String[] sepparators){
     //list of separators
     int next = -1;
     //loop through separatirs
@@ -65,6 +65,22 @@ public class StringCalculator {
       if (n != -1&&(n<next || next == -1)){
         //if(sepparators[i]=='\n')n+=1;
         next = n;
+
+      }
+    }
+    return next;
+  }
+  private int getNextSepLen(String s,String[] sepparators){
+    //list of separators
+    int next = -1;
+    //loop through separatirs
+    for(int i = 0; i < sepparators.length; i++){
+      int n  = s.indexOf( sepparators[i] );
+      //make sure to get the most imidiate next separator
+      if (n != -1&&(sepparators[i].length()>next || next == -1)){
+        //if(sepparators[i]=='\n')n+=1;
+        next = sepparators[i].length();
+
       }
     }
     return next;
@@ -74,29 +90,46 @@ public class StringCalculator {
 
   public int add(String numbers) throws Exception {
     int sum = 0;
-    char[] sepparators;
+    String[] sepparators = new String[] {",","\n"};
     //check if custom seps:
     if(numbers.indexOf("//")!=-1){
-      sepparators = new char[] {numbers.charAt(2),',','\n'};
+      //load string
+      String CustDelims = numbers.substring(numbers.indexOf("//")+2,  numbers.indexOf('\n'));
+      if(CustDelims.indexOf("[") != -1){
+        while(CustDelims.indexOf("[") != -1  && CustDelims.indexOf("]") != -1){
+          String nSep = CustDelims.substring(1,CustDelims.indexOf("]"));
+          CustDelims  = CustDelims.substring(CustDelims.indexOf("]")+1);
+
+          String[] newSepArr = new String[sepparators.length+1];
+          newSepArr[newSepArr.length-1]=nSep;
+          System.arraycopy(sepparators, 0, newSepArr, 0, sepparators.length);
+          sepparators=newSepArr;
+        }
+      }else {
+        sepparators = new String[] {CustDelims,",","\n"};
+      }
+      //for(int i  = 0; i < sepparators.length; i++){System.err.println(sepparators[i]);}
+
+
+
       numbers=numbers.substring(numbers.indexOf('\n')+1);
-    }else{
-      //baseic seps
-      sepparators = new char[] {',','\n'};
     }
 
     //loop though all the numbers
     for(int i = 0; i < numbers.length();){
       //get length until next separator
       int untilNextSepparator = getNextSep( numbers.substring(i) ,sepparators);
+      int sepLen = getNextSepLen( numbers.substring(i) ,sepparators);
       //check if there is last
       int j;
       if(untilNextSepparator>0){
         j = Integer.parseInt(numbers.substring(i,i+untilNextSepparator));
-        i += untilNextSepparator+1;
+        i += untilNextSepparator+getNextSepLen( numbers.substring(i) ,sepparators);
       }else{
         j=Integer.parseInt(numbers.substring(i));
         i = numbers.length();
       }
+
       //check if < 0
       if(j<0){
         throw new Exception("Negatives not allowed - " + j);
