@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class StringCalculator {
 
 
-  public class logStub implements StringCalculator.Logger {
+  public static class logStub implements StringCalculator.Logger {
     @Override
     public void log(Integer number) {
     }
@@ -24,7 +24,8 @@ public class StringCalculator {
       System.out.println(welcomeText[i]);
     }
 
-    StringCalculator sc= new StringCalculator(null);
+    logStub l = new logStub();
+    StringCalculator sc= new StringCalculator(l);
     Scanner scan = new Scanner(System.in);
 
     while(true){
