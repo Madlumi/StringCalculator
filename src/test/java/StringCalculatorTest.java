@@ -75,12 +75,12 @@ public class StringCalculatorTest {
   }
   @Test
   public void testTooBig2()  throws Exception{
-    assertEquals(1001,sc.add("1001,1001"));
+    assertEquals(2002,sc.add("1001,1001"));
     verify(ml,times(2)).log(1001);
   }
   @Test
   public void testTooBig3()  throws Exception{
-    assertEquals(1001,sc.add("1001,1000"));
+    assertEquals(2001,sc.add("1001,1000"));
     verify(ml,times(1)).log(1001);
     verify(ml,times(0)).log(1000);
   }
@@ -93,7 +93,7 @@ public class StringCalculatorTest {
   }
   @Test
   public void testNotTooBig2()  throws Exception{
-    assertEquals(1000,sc.add("1000,1000"));
+    assertEquals(2000,sc.add("1000,1000"));
     verify(ml,times(0)).log(1000);
 
   }
