@@ -1,6 +1,13 @@
+import java.util.Scanner;
 
 public class StringCalculator {
 
+
+  public class logStub implements StringCalculator.Logger {
+    @Override
+    public void log(Integer number) {
+    }
+  }
   public StringCalculator(Logger logger) {
     this.logger = logger;
   }
@@ -8,14 +15,32 @@ public class StringCalculator {
 
   public static String[] welcomeText = {
           "Welcome to a string calculator!",
-          "Enter your numbers separated by a <,>",
+          "Enter <scalc> followed by your numbers within <'> separated by a <,> ,",
           "and they will be summed together!"
+
   };
   public static void main(String args[]){
     for(int i = 0 ; i < welcomeText.length; i++){
       System.out.println(welcomeText[i]);
     }
+    Scanner scan = new Scanner(System.in);
+    String input = scan.nextLine();
 
+    //define logger for normal use, how do we injeeeeeeeeeect
+    StringCalculator sc= new StringCalculator(null);
+    if(input.indexOf("scalc")!=-1){
+      try {
+        int res = sc.add(input.substring(
+                input.indexOf("'")+1,
+                input.indexOf("'")+1+ input.substring(input.indexOf("'")+1).indexOf("'")
+        ));
+
+        System.out.println("The result is " + res);
+      } catch (Exception e){
+        System.err.println(e);
+      }
+
+    }
   }
 
 
