@@ -13,7 +13,7 @@ public class StringCalculatorTest {
 
 
   StringCalculator.Logger ml = mock(StringCalculator.Logger.class);
-  StringCalculator sc;
+  StringCalculator sc = new StringCalculator(ml);
   ByteArrayOutputStream stream = new ByteArrayOutputStream();
   PrintStream ops = System.out;
   PrintStream ps = new PrintStream(stream);
