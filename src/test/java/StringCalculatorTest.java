@@ -52,7 +52,7 @@ public class StringCalculatorTest {
   }
   @Test
   public void testInput()throws Exception {
-    ByteArrayInputStream in = new ByteArrayInputStream("scalc '1,2,3'\n".getBytes());
+    ByteArrayInputStream in = new ByteArrayInputStream("scalc '1,2,3'\n\n".getBytes());
     System.setIn(in);
     System.setOut(ps);
     String[] args = {""};
@@ -67,6 +67,27 @@ public class StringCalculatorTest {
     comp += "The result is 6\r\n";
     assertEquals(new String(stream.toByteArray()),comp);
   }
+
+  @Test
+  public void testContInput()throws Exception {
+    ByteArrayInputStream in = new ByteArrayInputStream("scalc '1,2,3'\nscalc '1,2,3'\nscalc '1,2,3'\n\n".getBytes());
+    System.setIn(in);
+    System.setOut(ps);
+    String[] args = {""};
+    StringCalculator.main(args);
+
+
+
+    String comp = "";
+    for(int i = 0; i < StringCalculator.welcomeText.length; i++){
+      comp+=( StringCalculator.welcomeText[i] +"\r\n");
+    }
+    comp += "The result is 6\r\n";
+    comp += "The result is 6\r\n";
+    comp += "The result is 6\r\n";
+    assertEquals(new String(stream.toByteArray()),comp);
+  }
+
 
 
 
