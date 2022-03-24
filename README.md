@@ -1,5 +1,0 @@
-# StringCalculator
-
-![](https://codebuild.us-east-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiN04ySkwvdmVweUlCZlZXL2U0L2ZIT0ZEYTlGVXhMZTZONUx1dS8xNW44WUh2NjhKa1M0c25Rc1FacUl2VS9UbVlFMGRDaWRaMDBCSEFVL1hkdDNWTklJPSIsIml2UGFyYW1ldGVyU3BlYyI6IjFPQzVqUFZZamZFUkhGbkgiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
-
-code for "Testdriven programutveckling" Lab 1
