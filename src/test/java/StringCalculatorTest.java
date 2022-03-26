@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
@@ -10,16 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class StringCalculatorTest {
 
-  public class logStub implements StringCalculator.Logger {
-    @Override
-    public void log(int number) {
-    }
-  }
   StringCalculator.Logger ml = mock(StringCalculator.Logger.class);
   StringCalculator sc = new StringCalculator(ml);
 
+  ByteArrayOutputStream stream = new ByteArrayOutputStream();
+  PrintStream ops = System.out;
+  PrintStream ps = new PrintStream(stream);
+
   @BeforeEach
   public void initTests(){
+    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+    PrintStream ps = new PrintStream(stream);
+    System.setOut(ps);
     ml = mock( StringCalculator.Logger.class);
     sc= new StringCalculator(ml);
   }
@@ -31,7 +34,8 @@ public class StringCalculatorTest {
     PrintStream ps = new PrintStream(stream);
 
     PrintStream ops = System.out;
-
+    ByteArrayInputStream in = new ByteArrayInputStream("\n".getBytes());
+    System.setIn(in);
     System.setOut(ps);
 
     String[] args = {""};
@@ -44,6 +48,24 @@ public class StringCalculatorTest {
     }
 
     assertEquals(new String(stream.toByteArray()).replaceAll("\\r\\n?", "\n"),comp);
+  }
+
+  @Test
+  public void testInput()throws Exception {
+    ByteArrayInputStream in = new ByteArrayInputStream("scalc '1,2,3'\n".getBytes());
+    System.setIn(in);
+    System.setOut(ps);
+    String[] args = {""};
+    StringCalculator.main(args);
+
+
+
+    String comp = "";
+    for(int i = 0; i < StringCalculator.welcomeText.length; i++){
+      comp+=( StringCalculator.welcomeText[i] +"\r\n");
+    }
+    comp += "The result is 6\r\n";
+    assertEquals(new String(stream.toByteArray()),comp);
   }
 
   @Test
