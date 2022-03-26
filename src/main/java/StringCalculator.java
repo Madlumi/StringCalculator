@@ -21,27 +21,28 @@ public class StringCalculator {
     for (int i = 0; i < welcomeText.length; i++) {
       System.out.println(welcomeText[i]);
     }
-
     Scanner scan = new Scanner(System.in);
-    String input = scan.nextLine();
+    StringCalculator sc = new StringCalculator(null);
+    while (true) {
+      String input = scan.nextLine();
+      if (input.indexOf("scalc") != -1) {
+        try {
+          int res = sc.add(input.substring(
+                  input.indexOf("'") + 1,
+                  input.indexOf("'") + 1 + input.substring(input.indexOf("'") + 1).indexOf("'")
+          ));
 
-    //define logger for normal use, how do we injeeeeeeeeeect
-    StringCalculator sc= new StringCalculator(null);
-    if(input.indexOf("scalc")!=-1){
-      try {
-        int res = sc.add(input.substring(
-                input.indexOf("'")+1,
-                input.indexOf("'")+1+ input.substring(input.indexOf("'")+1).indexOf("'")
-        ));
+          System.out.println("The result is " + res);
+        } catch (Exception e) {
+          System.err.println(e);
+        }
 
-        System.out.println("The result is " + res);
-      } catch (Exception e){
-        System.err.println(e);
+
+      } else if (input.length() <= 0) {
+        return;
       }
-
     }
   }
-
   public interface Logger { public void log(int number); }
 
 
