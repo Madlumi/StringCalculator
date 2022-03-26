@@ -92,6 +92,20 @@ public class StringCalculatorTest {
     assertEquals(new String(stream.toByteArray()).replaceAll("\\r\\n?", "\n"),comp2.replaceAll("\\r\\n?", "\n"));
   }
 
+
+  @Test
+  public void testExtraDelims()throws Exception {
+    assertEquals(7,sc.add("//[***][qqq]\n1***2qqq4"));
+  }
+  @Test
+  public void testExtraDelimsOne()throws Exception {
+    assertEquals(7,sc.add("//**\n1**2,4"));
+  }
+  @Test
+  public void testExtraDelimsOneB()throws Exception {
+    assertEquals(7,sc.add("//[***]\n1***2,4"));
+  }
+
   @Test
   public void testAddNone()throws Exception {
     StringCalculator.Logger ml = mock(StringCalculator.Logger.class);
