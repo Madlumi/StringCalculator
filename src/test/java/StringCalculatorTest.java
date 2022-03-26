@@ -18,7 +18,7 @@ public class StringCalculatorTest {
 
   @BeforeEach
   public void initTests(){
-    ml = mock(StringCalculator.Logger.class);
+    ml = mock( StringCalculator.Logger.class);
     sc= new StringCalculator(ml);
   }
 
@@ -70,16 +70,19 @@ public class StringCalculatorTest {
 
   @Test
   public void testTooBig()  throws Exception{
+    initTests();
     assertEquals(1001,sc.add("1001"));
     verify(ml,times(1)).log(1001);
   }
   @Test
   public void testTooBig2()  throws Exception{
+    initTests();
     assertEquals(2002,sc.add("1001,1001"));
     verify(ml,times(2)).log(1001);
   }
   @Test
   public void testTooBig3()  throws Exception{
+    initTests();
     assertEquals(2001,sc.add("1001,1000"));
     verify(ml,times(1)).log(1001);
     verify(ml,times(0)).log(1000);
