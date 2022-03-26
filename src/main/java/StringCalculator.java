@@ -6,7 +6,7 @@ public class StringCalculator {
     this.logger = logger;
   }
 
-  public class logStub implements StringCalculator.Logger {
+  public static class logStub implements StringCalculator.Logger {
     @Override
     public void log(int number) {
     }
@@ -22,7 +22,8 @@ public class StringCalculator {
       System.out.println(welcomeText[i]);
     }
     Scanner scan = new Scanner(System.in);
-    StringCalculator sc = new StringCalculator(null);
+    logStub l = new logStub();
+    StringCalculator sc= new StringCalculator(l);
     while (true) {
       String input = scan.nextLine();
       if (input.indexOf("scalc") != -1) {
