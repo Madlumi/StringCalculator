@@ -65,8 +65,8 @@ public class StringCalculatorTest {
     for(int i = 0; i < StringCalculator.welcomeText.length; i++){
       comp+=( StringCalculator.welcomeText[i] +"\n");
     }
-    comp += "The result is 6\r\n";
-    assertEquals(new String(stream.toByteArray()).replaceAll("\\r\\n?", "\n"),comp);
+    comp += "The result is 6\n";
+    assertEquals(new String(stream.toByteArray()).replaceAll("\\r\\n?", "\n"),comp.replaceAll("\\r\\n?", "\n"));
   }
 
   @Test
