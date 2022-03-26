@@ -5,10 +5,16 @@ public class StringCalculator {
     this.logger = logger;
   }
 
-  public static void main(String args[]){
-    System.out.println("test");
+  public static String[] welcomeText = {
+          "Welcome to a string calculator!",
+          "Enter your numbers separated by a <,>",
+          "and they will be summed together!"
+  };
+  public static void main(String args[]) {
+    for (int i = 0; i < welcomeText.length; i++) {
+      System.out.println(welcomeText[i]);
+    }
   }
-
 
   public interface Logger { public void log(int number); }
 
