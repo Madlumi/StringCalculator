@@ -14,14 +14,14 @@ public class StringCalculatorTest {
   StringCalculator.Logger ml = mock(StringCalculator.Logger.class);
   StringCalculator sc = new StringCalculator(ml);
 
-  ByteArrayOutputStream stream = new ByteArrayOutputStream();
+  ByteArrayOutputStream stream;
   PrintStream ops = System.out;
-  PrintStream ps = new PrintStream(stream);
+  PrintStream ps;
 
   @BeforeEach
   public void initTests(){
-    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-    PrintStream ps = new PrintStream(stream);
+    stream = new ByteArrayOutputStream();
+    ps = new PrintStream(stream);
     System.setOut(ps);
     ml = mock( StringCalculator.Logger.class);
     sc= new StringCalculator(ml);
@@ -31,6 +31,7 @@ public class StringCalculatorTest {
   @Test
   public void testWelcome()throws Exception {
     initTests();
+
     ByteArrayOutputStream stream = new ByteArrayOutputStream();
     PrintStream ps = new PrintStream(stream);
 
@@ -54,9 +55,9 @@ public class StringCalculatorTest {
   @Test
   public void testInput()throws Exception {
     initTests();
+
     ByteArrayInputStream in = new ByteArrayInputStream("scalc '1,2,3'\n\n".getBytes());
     System.setIn(in);
-    System.setOut(ps);
     String[] args = {""};
     StringCalculator.main(args);
 
