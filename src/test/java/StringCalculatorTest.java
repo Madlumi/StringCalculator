@@ -30,6 +30,7 @@ public class StringCalculatorTest {
 
   @Test
   public void testWelcome()throws Exception {
+    initTests();
     ByteArrayOutputStream stream = new ByteArrayOutputStream();
     PrintStream ps = new PrintStream(stream);
 
