@@ -62,12 +62,12 @@ public class StringCalculatorTest {
 
 
 
-    String comp = "";
+    String comp1 = "";
     for(int i = 0; i < StringCalculator.welcomeText.length; i++){
-      comp+=( StringCalculator.welcomeText[i] +"\n");
+      comp1+=( StringCalculator.welcomeText[i] +"\n");
     }
-    comp += "The result is 6\n";
-    assertEquals(new String(stream.toByteArray()).replaceAll("\\r\\n?", "\n"),comp.replaceAll("\\r\\n?", "\n"));
+    comp1 += "The result is 6\n";
+    assertEquals(new String(stream.toByteArray()).replaceAll("\\r\\n?", "\n"),comp1.replaceAll("\\r\\n?", "\n"));
   }
 
   @Test
@@ -81,14 +81,14 @@ public class StringCalculatorTest {
 
 
 
-    String comp = "";
+    String comp2 = "";
     for(int i = 0; i < StringCalculator.welcomeText.length; i++){
-      comp+=( StringCalculator.welcomeText[i] +"\n");
+      comp2+=( StringCalculator.welcomeText[i] +"\n");
     }
-    comp += "The result is 6\n";
-    comp += "The result is 6\n";
-    comp += "The result is 6\n";
-    assertEquals(new String(stream.toByteArray()).replaceAll("\\r\\n?", "\n"),comp.replaceAll("\\r\\n?", "\n"));
+    comp2 += "The result is 6\n";
+    comp2 += "The result is 6\n";
+    comp2 += "The result is 6\n";
+    assertEquals(new String(stream.toByteArray()).replaceAll("\\r\\n?", "\n"),comp2.replaceAll("\\r\\n?", "\n"));
   }
 
   @Test
